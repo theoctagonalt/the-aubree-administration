@@ -11,7 +11,7 @@ extern pros::MotorGroup right_motors;
 
 extern pros::Motor arm_motor;
 extern pros::Motor hooks_motor;
-extern pros::Motor floating_motor;
+extern pros::Motor preroller_motor;
 
 extern pros::adi::DigitalOut mogo;
 extern pros::adi::DigitalOut doinker;

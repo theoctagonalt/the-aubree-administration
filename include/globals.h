@@ -24,4 +24,7 @@
 #define FWD 1
 #define REV 2
 
+#define RETRACTED 0
+#define EXTENDED 1
+
 #endif

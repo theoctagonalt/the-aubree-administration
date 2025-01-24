@@ -10,7 +10,7 @@
 #define RIGHT_BACK_MOTOR_TOP 
 
 #define HOOKS 
-#define FLOATING  
+#define PREROLLER  
 #define ARM 
 
 #define MOGO 
@@ -29,7 +29,7 @@ pros::MotorGroup right_motors ({RIGHT_FRONT_MOTOR, RIGHT_BACK_MOTOR, RIGHT_BACK_
 
 pros::Motor arm_motor (ARM, pros::MotorGear::green);
 pros::Motor hooks_motor(HOOKS, pros::MotorGear::green);
-pros::Motor floating_motor(FLOATING, pros::MotorGear::green);
+pros::Motor preroller_motor(PREROLLER, pros::MotorGear::green);
 
 //pistons
 pros::adi::DigitalOut mogo (MOGO);
