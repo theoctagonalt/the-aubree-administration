@@ -2,7 +2,7 @@
 #define MOGO__H__
 
 namespace Mogo{
-  void set_mogo(int state);
+  void toggle();
   int get_state();
 }
 

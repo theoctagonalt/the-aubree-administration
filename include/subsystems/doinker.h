@@ -2,7 +2,7 @@
 #define DOINKER__H__
 
 namespace Doinker{
-  void set_doinker(int state);
+  void toggle();
   int get_state();
 }
 

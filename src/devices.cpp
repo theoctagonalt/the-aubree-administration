@@ -1,25 +1,25 @@
 #include "main.h"
 #include "lemlib/api.hpp"
 
-#define LEFT_FRONT_MOTOR 
-#define LEFT_BACK_MOTOR 
-#define LEFT_BACK_MOTOR_TOP
+#define LEFT_FRONT_MOTOR -16 
+#define LEFT_BACK_MOTOR -11
+#define LEFT_BACK_MOTOR_TOP 15
 
-#define RIGHT_FRONT_MOTOR 
-#define RIGHT_BACK_MOTOR 
-#define RIGHT_BACK_MOTOR_TOP 
+#define RIGHT_FRONT_MOTOR 13 
+#define RIGHT_BACK_MOTOR 12
+#define RIGHT_BACK_MOTOR_TOP -14 
 
-#define HOOKS 
-#define PREROLLER  
-#define ARM 
+#define HOOKS 5
+#define PREROLLER -17  
+#define ARM -99
 
-#define MOGO 
-#define DOINKER 
+#define MOGO 1
+#define DOINKER -99
 
-#define ARM_SENSOR   
-#define INTAKE_COLOUR
-#define INERTIAL_SENSOR 
-#define INTAKE_SWITCH 
+#define ARM_SENSOR -99 
+#define INTAKE_COLOUR -99
+#define INERTIAL_SENSOR 18
+#define INTAKE_SWITCH -99
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
 
@@ -28,7 +28,7 @@ pros::MotorGroup left_motors ({LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, LEFT_BACK_MOTO
 pros::MotorGroup right_motors ({RIGHT_FRONT_MOTOR, RIGHT_BACK_MOTOR, RIGHT_BACK_MOTOR_TOP}, pros::MotorGear::blue);
 
 pros::Motor arm_motor (ARM, pros::MotorGear::green);
-pros::Motor hooks_motor(HOOKS, pros::MotorGear::green);
+pros::Motor hooks_motor(HOOKS, pros::MotorGear::red);
 pros::Motor preroller_motor(PREROLLER, pros::MotorGear::green);
 
 //pistons

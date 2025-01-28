@@ -2,6 +2,7 @@
 #define INTAKE__H__
 
 namespace Intake{
+  void toggle();
   void set_preroller(int state);
   void set_hooks(int state);
   int get_hooks();

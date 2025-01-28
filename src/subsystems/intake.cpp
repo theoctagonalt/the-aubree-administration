@@ -9,6 +9,16 @@ namespace Intake{
   int preroller_stage = OFF;
   int target_colour;
 
+  void toggle(){
+    if(hooks_state == FWD){
+      set_hooks(OFF);
+      set_preroller(OFF);
+    }else{
+      set_hooks(FWD);
+      set_preroller(FWD);
+    }
+  }
+
   void set_preroller(int state){
     if(state == FWD){
       preroller_motor.move_velocity(200);
