@@ -60,6 +60,19 @@ void opcontrol(){
         Arm::set_state(current_state++);
       }
     }
+
+    if(master.get_digital(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_UP)){
+      Arm::manual_control(0, true);
+    }else{
+      Arm::manual_control(0, false);
+    }
+
+    if(master.get_digital(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_DOWN)){
+      Arm::manual_control(1, true);
+    }else{
+      Arm::manual_control(1, false);
+    }
+
     Arm::arm_pid();
 
     //game
