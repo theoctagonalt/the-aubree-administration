@@ -24,7 +24,21 @@
 #define FWD 1
 #define REV 2
 
+//piston states
 #define RETRACTED 0
 #define EXTENDED 1
+
+//arm states
+#define REST 0
+#define LOADING 1
+#define READY 2
+#define SCORING 3
+
+#define REST_DEG 0
+#define LOADING_DEG 0
+#define READY_DEG 0
+#define SCORING_DEG 0
+
+int arm_state_values[] = {REST_DEG, LOADING_DEG, READY_DEG, SCORING_DEG};
 
 #endif

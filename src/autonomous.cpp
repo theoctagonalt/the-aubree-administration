@@ -4,8 +4,8 @@
 #include "lemlib/api.hpp"
 #include "devices.h"
 #include "autonomous.h"
-// #include "./subsystems/arm.h"
-// #include "./subsystems/intake.h"
+#include "./subsystems/arm.h"
+#include "./subsystems/intake.h"
 // #include "./routines/pos.h"
 // #include "./routines/neg.h"
 // #include "./routines/skills.h"
@@ -20,10 +20,18 @@ void screen() {
 			pros::delay(50);
 	}
 }
+void update_subsystems() {
+	while(pros::competition::is_autonomous()){
+		Intake::update_intake();
+		Arm::arm_pid();
+		pros::delay(20);
+	}
+}
 
 void autonomous() {
   int routine = get_routine();
-	pros::Task screenTask(screen);
+	pros::Task screen_task(screen);
+	pros::Task subsystems_task(update_subsystems);
 	// if(routine == POS){
 	// 	pos_routine();
 	// }else if(routine == NEG){

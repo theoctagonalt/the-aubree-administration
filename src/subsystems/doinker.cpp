@@ -7,13 +7,8 @@
 namespace Doinker{
   int state = RETRACTED;
   void toggle(){
-    if(state == RETRACTED){
-      doinker.set_value(true);
-      state = EXTENDED;
-    }else{
-      doinker.set_value(false);
-      state = RETRACTED;
-    }
+    doinker.set_value(!state);
+    state = !state;
   }
   int get_state(){
     return state;

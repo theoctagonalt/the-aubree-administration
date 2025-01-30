@@ -11,15 +11,15 @@
 
 #define HOOKS 5
 #define PREROLLER -17  
-#define ARM -99
+#define ARM 10
 
 #define MOGO 1
-#define DOINKER -99
+#define DOINKER 10
 
-#define ARM_SENSOR -99 
-#define INTAKE_COLOUR -99
+#define ARM_SENSOR 10 
+#define INTAKE_COLOUR 10
 #define INERTIAL_SENSOR 18
-#define INTAKE_SWITCH -99
+#define INTAKE_SWITCH 10
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
 
@@ -35,7 +35,7 @@ pros::Motor preroller_motor(PREROLLER, pros::MotorGear::green);
 pros::adi::DigitalOut mogo (MOGO);
 pros::adi::DigitalOut doinker (DOINKER);
 
-//sensors
+// sensors
 pros::Rotation arm_sensor (ARM_SENSOR);
 pros::Optical intake_colour (INTAKE_COLOUR);
 pros::adi::DigitalIn intake_switch (INTAKE_SWITCH);
@@ -84,6 +84,4 @@ lemlib::TrackingWheel right_side_imes (&right_motors, lemlib::Omniwheel::NEW_325
 
 lemlib::OdomSensors sensors (&left_side_imes, &right_side_imes, nullptr, nullptr, &inertial);
 
-lemlib::ExpoDriveCurve throttle_curve(3, 10, 1.046);
-
-lemlib::Chassis chassis (drivetrain, lateral_controller, angular_controller, sensors, &throttle_curve, nullptr);
+lemlib::Chassis chassis (drivetrain, lateral_controller, angular_controller, sensors);
