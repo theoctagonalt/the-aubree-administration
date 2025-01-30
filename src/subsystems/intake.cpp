@@ -8,6 +8,8 @@ namespace Intake{
   int hooks_state = OFF;
   int preroller_stage = OFF;
   int target_colour;
+  int last_colour;
+  int timeout;
 
   void toggle(){
     if(hooks_state == FWD){
@@ -53,7 +55,27 @@ namespace Intake{
   }
 
   void update_intake(){
+    double current_hue = intake_colour.get_hue();
+    if(current_hue < RED_HUE_MAX && current_hue > RED_HUE_MIN){
+      last_colour = RED;
+    }else if(current_hue < BLUE_HUE_MAX && current_hue > BLUE_HUE_MIN){
+      last_colour = BLUE;
+    }
     //TODO: INSERT CODE FOR COLOUR SORT & AUTO INTAKE TURN OFF
+    if(intake_switch.get_value()){
+      if(last_colour != target_colour && hooks_state == FWD && timeout == 0 && last_colour != -1){
+        set_hooks(OFF);
+        timeout++;
+        last_colour = -1;
+      }
+    }
+    if(timeout > 0){
+      timeout++;
+      if(timeout > 15 && hooks_state == OFF){
+        timeout = 0;
+        set_hooks(FWD);
+      }
+    }
   }
 
   void set_target_colour(int colour){
