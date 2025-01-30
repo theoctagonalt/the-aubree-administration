@@ -64,6 +64,7 @@ namespace Intake{
     //TODO: INSERT CODE FOR COLOUR SORT & AUTO INTAKE TURN OFF
     if(intake_switch.get_value()){
       if(last_colour != target_colour && hooks_state == FWD && timeout == 0 && last_colour != -1){
+        master.rumble("...");
         set_hooks(OFF);
         timeout++;
         last_colour = -1;
