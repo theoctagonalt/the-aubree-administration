@@ -34,7 +34,9 @@ namespace Arm{
       if(value){
         arm_motor.move_velocity(200);
         pid_enabled = false;
+        manual_control_up = true;
       }else{
+        manual_control_up = false;
         arm_motor.move_velocity(0);
         pid_enabled = true;
         target_pos = arm_sensor.get_angle() / 100.0;
