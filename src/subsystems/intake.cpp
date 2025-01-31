@@ -42,7 +42,8 @@ namespace Intake{
       hooks_motor.move_velocity(-200);
       hooks_state = REV;
     }else{
-      hooks_motor.move_velocity(0);
+      master.rumble("..");
+      hooks_motor.brake();
       hooks_state = OFF;
     }
   }
@@ -53,7 +54,7 @@ namespace Intake{
   int get_preroller(){
     return preroller_stage;
   }
-
+  int counter = 0;
   void update_intake(){
     double current_hue = intake_colour.get_hue();
     if(current_hue < RED_HUE_MAX && current_hue > RED_HUE_MIN){
@@ -61,12 +62,14 @@ namespace Intake{
     }else if(current_hue < BLUE_HUE_MAX && current_hue > BLUE_HUE_MIN){
       last_colour = BLUE;
     }
-    //TODO: INSERT CODE FOR COLOUR SORT & AUTO INTAKE TURN OFF
+    pros::lcd::print(4, "colour: %i", last_colour);
     if(intake_switch.get_value()){
-      if(last_colour != target_colour && hooks_state == FWD && timeout == 0 && last_colour != -1){
-        master.rumble("...");
-        set_hooks(OFF);
-        timeout++;
+      counter++;
+      pros::lcd::print(5, "switch: %i", counter);
+      if(last_colour != target_colour && last_colour != -1 && hooks_state == FWD && timeout == 0){
+        master.rumble("..");
+        set_hooks(-1);
+        timeout=1;
         last_colour = -1;
       }
     }

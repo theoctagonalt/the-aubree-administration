@@ -34,11 +34,9 @@
 #define READY 2
 #define SCORING 3
 
-#define REST_DEG 0
-#define LOADING_DEG 0
-#define READY_DEG 0
-#define SCORING_DEG 0
-
-int arm_state_values[] = {REST_DEG, LOADING_DEG, READY_DEG, SCORING_DEG};
+#define REST_DEG 345
+#define LOADING_DEG 335
+#define READY_DEG 257
+#define SCORING_DEG 220
 
 #endif

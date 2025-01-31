@@ -8,9 +8,8 @@ int match;
 
 void initialize(){
 	pros::lcd::initialize();
-	master.clear();
 	chassis.calibrate(true);
-	// intake_colour.set_led_pwm(50);
+	intake_colour.set_led_pwm(50);
 }
 
 void competition_initialize(){

@@ -9,17 +9,17 @@
 #define RIGHT_BACK_MOTOR 12
 #define RIGHT_BACK_MOTOR_TOP -14 
 
-#define HOOKS 5
-#define PREROLLER -17  
-#define ARM 10
+#define HOOKS -17
+#define PREROLLER 5  
+#define ARM -20
 
 #define MOGO 1
-#define DOINKER 10
+#define DOINKER 2
 
-#define ARM_SENSOR 10 
-#define INTAKE_COLOUR 10
+#define ARM_SENSOR 2 
+#define INTAKE_COLOUR 1
 #define INERTIAL_SENSOR 18
-#define INTAKE_SWITCH 10
+#define INTAKE_SWITCH 3
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
 
@@ -68,9 +68,9 @@ lemlib::ControllerSettings lateral_controller(3.5,
                                              0 //TODO: TUNE SLEW
                                              );
 
-lemlib::ControllerSettings arm_controller(0.03,
+lemlib::ControllerSettings arm_controller(3,
                                           0, 
-                                          0.00001, 
+                                          0.1, 
                                           0, 
                                           0, 
                                           0, 

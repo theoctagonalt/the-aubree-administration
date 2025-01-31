@@ -5,52 +5,25 @@
 #include "initialize.h"
 
 namespace Arm{
-  int current_state = REST;
-  int target_state;
+  int target_state = REST;
   int target_pos;
+
+  int arm_state_values[] = {REST_DEG, LOADING_DEG, READY_DEG, SCORING_DEG};
 
   bool pid_enabled = false;
   int error_timeout = 0;
   double accumulated_error = 0;
   double last_error = 0;
 
-  bool manual_control_up = false;
-  bool manual_control_down = false;
-
   void set_state(int state){
     target_state = state;
     pid_enabled = true;
     target_pos = arm_state_values[target_state];
-    for(int i = 0; i<=state; i++){
-      master.rumble(".");
-    }
+    pros::lcd::clear_line(1);
+    pros::lcd::print(1, "target: %i, pos: %i", target_state, target_pos);
   }
   int get_state(){
-    return current_state;
-  }
-
-  void manual_control(int direction, bool value){
-    if(direction == 0 && manual_control_up != value){
-      if(value){
-        arm_motor.move_velocity(200);
-        pid_enabled = false;
-        manual_control_up = true;
-      }else{
-        manual_control_up = false;
-        arm_motor.move_velocity(0);
-        pid_enabled = true;
-        target_pos = arm_sensor.get_angle() / 100.0;
-      }
-    }else if(direction == 1 && manual_control_down != value){
-      if(value){
-        arm_motor.move_velocity(200);
-        pid_enabled = false;
-      }else{
-        arm_motor.move_velocity(0);
-        pid_enabled = true;
-        target_pos = arm_sensor.get_angle() / 100.0;
-      }
-    }
+    return target_state;
   }
 
   void arm_pid(){
@@ -61,18 +34,32 @@ namespace Arm{
       bool windup = std::abs(error) > arm_controller.largeError;
 
       error_timeout = 0;
-      int p = error;
-      int i = windup ? accumulated_error : 0;
-      int d = error - last_error;
+      double p = error;
+      double i = windup ? accumulated_error : 0;
+      double d = error - last_error;
 
-      int vel = arm_controller.kP * p + arm_controller.kI * i + arm_controller.kD * d;
+      double vel = arm_controller.kP * p + arm_controller.kI * i + arm_controller.kD * d;
 
       arm_motor.move_velocity(vel);
+
+      pros::lcd::clear_line(0);
+      pros::lcd::print(0, "%f, %f", current_pos, error);
 
       if(windup) accumulated_error += error;
       last_error = error;
 
-      if(!windup && target_state == REST) pid_enabled = false; 
+      if(target_state == LOADING &&fabs(error) < 2){
+        pid_enabled=false;
+        arm_motor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        arm_motor.brake();
+      }
+
+      if(target_state == REST && fabs(error) < 2){
+        pid_enabled=false;
+        arm_motor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        arm_motor.brake();
+        master.rumble("...");
+      }
     }
   }
 }

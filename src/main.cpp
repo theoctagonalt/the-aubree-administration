@@ -10,6 +10,8 @@
 
 int game_time = 0;
 void opcontrol(){
+  int counter = 0;
+  Intake::set_target_colour(get_colour());
 	while(true){
     //get the y and x values of the left and right joysticks respectively
     int throttle = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -32,6 +34,13 @@ void opcontrol(){
       }
     }
 
+    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){
+      Intake::set_target_colour(!Intake::get_target_colour());
+    }
+    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
+      Intake::set_target_colour(-1);
+    }
+
     Intake::update_intake();
 
     //mogo
@@ -45,32 +54,27 @@ void opcontrol(){
     }
 
     //arm
-    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L2)){
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)){
+      counter++;
       int current_state = Arm::get_state();
+
+      pros::lcd::print(3, "current state: %i, %i", current_state, counter);
       if(current_state == SCORING){
         Arm::set_state(REST);
       }else{
-        Arm::set_state(current_state++);
+        Arm::set_state(current_state+1);
       }
     }
 
-    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)){
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L2)){
       int current_state = Arm::get_state();
       if(current_state != REST){
-        Arm::set_state(current_state++);
+        Arm::set_state(current_state-1);
       }
     }
 
-    if(master.get_digital(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_UP)){
-      Arm::manual_control(0, true);
-    }else{
-      Arm::manual_control(0, false);
-    }
-
-    if(master.get_digital(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_DOWN)){
-      Arm::manual_control(1, true);
-    }else{
-      Arm::manual_control(1, false);
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
+      Arm::set_state(SCORING);
     }
 
     Arm::arm_pid();
