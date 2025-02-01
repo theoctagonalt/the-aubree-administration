@@ -8,9 +8,8 @@
 #include "./subsystems/mogo.h"
 #include "./subsystems/doinker.h"
 
-int game_time = 0;
 void opcontrol(){
-  int counter = 0;
+  int game_time = 0;
   Intake::set_target_colour(get_colour());
 	while(true){
     //get the y and x values of the left and right joysticks respectively
@@ -55,10 +54,9 @@ void opcontrol(){
 
     //arm
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)){
-      counter++;
       int current_state = Arm::get_state();
 
-      pros::lcd::print(3, "current state: %i, %i", current_state, counter);
+      pros::lcd::print(3, "current state: %i", current_state);
       if(current_state == SCORING){
         Arm::set_state(REST);
       }else{
@@ -74,7 +72,7 @@ void opcontrol(){
     }
 
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
-      Arm::set_state(SCORING);
+      Arm::set_state(READY);
     }
 
     Arm::arm_pid();
