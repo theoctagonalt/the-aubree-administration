@@ -2,8 +2,8 @@
 #include "globals.h"
 #include "devices.h"
 
-int colour;
-int routine;
+int colour = RED;
+int routine = SKILLS;
 int match;
 
 void initialize(){
@@ -22,8 +22,8 @@ void competition_initialize(){
 				if(routine != 3) routine ++;
 				else {
 					routine = -1;
-					if(match != 1) match++;
-					else match = 0; 
+					// if(match != 1) match++;
+					// else match = 0; 
 				}				
 			}
 		}

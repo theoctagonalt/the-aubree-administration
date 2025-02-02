@@ -6,9 +6,9 @@
 #include "autonomous.h"
 #include "./subsystems/arm.h"
 #include "./subsystems/intake.h"
-// #include "./routines/pos.h"
-// #include "./routines/neg.h"
-// #include "./routines/skills.h"
+#include "./autos/pos.h"
+#include "./autos/neg.h"
+#include "./autos/skills.h"
 
 void screen() {
 	// loop forever
@@ -29,17 +29,18 @@ void update_subsystems() {
 }
 
 void autonomous() {
+  Intake::set_target_colour(get_colour());
   int routine = get_routine();
 	pros::Task screen_task(screen);
 	pros::Task subsystems_task(update_subsystems);
-	// if(routine == POS){
-	// 	pos_routine();
-	// }else if(routine == NEG){
-	// 	neg_routine();
-	// }else if(routine == SKILLS){
-	// 	skills();
-	// }else if(routine == DRIVE_FORWARD){
-	// 	chassis.setPose(0, 0, 90);
-	// 	chassis.moveToPoint(24, 0, 3000);
-	// }
+	if(routine == POS){
+		pos_route();
+	}	else if(routine == NEG){
+		neg_route();
+	}	else if(routine == SKILLS){
+		skills_route();
+	}else if(routine == DRIVE_FORWARD){
+		chassis.setPose(0, 0, 90);
+		chassis.moveToPoint(24, 0, 3000);
+	}
 }

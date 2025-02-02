@@ -34,10 +34,16 @@ void opcontrol(){
     }
 
     if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){
+      master.rumble("..");
       Intake::set_target_colour(!Intake::get_target_colour());
     }
     if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
-      Intake::set_target_colour(-1);
+      master.rumble("---");
+      if(Intake::get_target_colour() == -1){
+        Intake::set_target_colour(get_colour());
+      }else{
+        Intake::set_target_colour(-1);
+      }
     }
 
     Intake::update_intake();
@@ -45,6 +51,11 @@ void opcontrol(){
     //mogo
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_RIGHT)){
       Mogo::toggle();
+      if(Mogo::get_state() == EXTENDED){
+        master.rumble("-");
+      }else{
+        master.rumble(".");
+      }
     }
 
     //doinker
@@ -72,7 +83,7 @@ void opcontrol(){
     }
 
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
-      Arm::set_state(READY);
+      Arm::set_state(SCORING);
     }
 
     Arm::arm_pid();

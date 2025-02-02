@@ -46,8 +46,8 @@ pros::IMU inertial (INERTIAL_SENSOR);
 lemlib::Drivetrain drivetrain (&left_motors, &right_motors, 11.705, lemlib::Omniwheel::NEW_275, 400, 2);
 
 //================================================================= TODO
-lemlib::ControllerSettings angular_controller(1.6, //kP
-                                              0.01, //kI
+lemlib::ControllerSettings angular_controller(1.55, //kP
+                                              0.03, //kI
                                               0, //kD
                                               7.5, //anti-windup
                                               1, //small error range (in)

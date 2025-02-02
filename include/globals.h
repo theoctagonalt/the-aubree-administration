@@ -31,8 +31,8 @@
 //arm states
 #define REST 0
 #define LOADING 1
-#define SCORING 2
-#define READY 3
+#define SCORING 3
+#define READY 2
 
 #define REST_DEG 345
 #define LOADING_DEG 335

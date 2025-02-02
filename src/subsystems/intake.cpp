@@ -1,4 +1,5 @@
 #include "./subsystems/intake.h"
+#include "./subsystems/arm.h"
 #include "main.h"
 #include "devices.h"
 #include "globals.h"
@@ -42,7 +43,6 @@ namespace Intake{
       hooks_motor.move_velocity(-200);
       hooks_state = REV;
     }else{
-      master.rumble("..");
       hooks_motor.brake();
       hooks_state = OFF;
     }
@@ -55,6 +55,7 @@ namespace Intake{
     return preroller_stage;
   }
   int counter = 0;
+  bool colour_sort = true;
   void update_intake(){
     double current_hue = intake_colour.get_hue();
     if(current_hue < RED_HUE_MAX && current_hue > RED_HUE_MIN){
@@ -63,7 +64,7 @@ namespace Intake{
       last_colour = BLUE;
     }
     pros::lcd::print(4, "colour: %i", last_colour);
-    if(intake_switch.get_value()){
+    if(intake_switch.get_value() && Arm::get_state() != LOADING && colour_sort){
       counter++;
       pros::lcd::print(5, "switch: %i", counter);
       if(last_colour != target_colour && last_colour != -1 && hooks_state == FWD && timeout == 0){
@@ -83,6 +84,8 @@ namespace Intake{
   }
 
   void set_target_colour(int colour){
+    if(colour == -1) colour_sort = false;
+    else colour_sort = true;
     target_colour = colour;
   }
   int get_target_colour(){

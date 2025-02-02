@@ -58,7 +58,6 @@ namespace Arm{
         pid_enabled=false;
         arm_motor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         arm_motor.brake();
-        master.rumble("...");
       }
     }
   }
