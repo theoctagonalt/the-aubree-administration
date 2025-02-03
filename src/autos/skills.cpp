@@ -82,32 +82,32 @@ void skills_route(){
   chassis.turnToHeading(180, 1000);
   Intake::toggle();
   chassis.waitUntilDone();
-  chassis.moveToPoint(-22, -45, 1000, {.maxSpeed=50});
+  chassis.moveToPoint(-20, -45, 1000, {.maxSpeed=50});
   chassis.waitUntilDone();
-  chassis.moveToPoint(-24, -36, 1000, {.forwards=false});
+  chassis.moveToPoint(-22, -36, 1000, {.forwards=false});
 
   //second
-  chassis.moveToPoint(-48, -36, 1000);
+  chassis.moveToPoint(-45, -36, 1000);
   chassis.waitUntilDone();
-  chassis.moveToPoint(-53, -36, 500, {.maxSpeed=100});
+  chassis.moveToPoint(-50, -36, 500, {.maxSpeed=100});
   chassis.waitUntilDone();
 
   //third, fourth
   chassis.turnToHeading(0, 1000);
   chassis.waitUntilDone();
-  chassis.moveToPoint(-48, 3, 2000, {.maxSpeed=50});
+  chassis.moveToPoint(-45, 3, 2000, {.maxSpeed=50});
   chassis.waitUntilDone();
 
   //fifth
   chassis.moveToPose(-36, -12, -90, 1000, {.forwards=false});
   chassis.waitUntilDone();
-  chassis.moveToPoint(-60, -12, 1000, {.maxSpeed=50});
+  chassis.moveToPoint(-55, -12, 1000, {.maxSpeed=50});
 
   //sixth
   chassis.waitUntilDone();
-  chassis.moveToPoint(-60, -60, 2000, {.maxSpeed=100});
+  chassis.moveToPoint(-55, -60, 2000, {.maxSpeed=100});
   chassis.waitUntilDone();
-  chassis.moveToPoint(-57, -70, 1000, {.maxSpeed=50});
+  chassis.moveToPoint(-55, -70, 1000, {.maxSpeed=50});
   chassis.waitUntilDone();
 
   //drop mogo

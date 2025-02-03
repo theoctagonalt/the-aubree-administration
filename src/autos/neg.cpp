@@ -36,16 +36,23 @@ void neg_route(){
   chassis.moveToPoint(n*-24, -36, 1000);
   chassis.waitUntilDone();
   if(colour==RED){
-    chassis.moveToPoint(-10, -36, 2000, {.maxSpeed=100});
+    // chassis.moveToPoint(-10, -36, 2000, {.maxSpeed=100});
+    // chassis.waitUntilDone();
+    // chassis.moveToPoint(-24, -36, 500);
+    // chassis.waitUntilDone();
+    // chassis.moveToPoint(-10, -36, 1000, {.maxSpeed=100});
+  }else{
+    chassis.moveToPoint(15, -40, 1000);
     chassis.waitUntilDone();
-    chassis.moveToPoint(-24, -36, 500);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(-10, -36, 1000, {.maxSpeed=100});
   }
-  pros::delay(500);
-  chassis.moveToPoint(n*-39, -3, 1000);
-  chassis.waitUntilDone();
-  chassis.moveToPoint(n*-39, 1, 1500);
-  chassis.waitUntilDone();
-  Intake::toggle();
+  pros::delay(1000);
+  if(colour==BLUE){
+    chassis.moveToPoint(n*-39, -3, 1000);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(n*-39, 1, 1500);
+    chassis.waitUntilDone();
+    Intake::toggle();
+  }else{
+    chassis.moveToPoint(5, 35, 5000, {.maxSpeed=75});
+  }
 }

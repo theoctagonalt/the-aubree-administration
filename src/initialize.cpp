@@ -3,7 +3,7 @@
 #include "devices.h"
 
 int colour = RED;
-int routine = SKILLS;
+int routine = NEG;
 int match;
 
 void initialize(){
