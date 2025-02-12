@@ -66,24 +66,26 @@ void opcontrol(){
     //arm
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)){
       int current_state = Arm::get_state();
-
-      pros::lcd::print(3, "current state: %i", current_state);
-      if(current_state == SCORING){
-        Arm::set_state(REST);
+      if(current_state == REST || current_state == SCORING){
+        Arm::set_state(LOADING);
       }else{
-        Arm::set_state(current_state+1);
+        Arm::set_state(SCORING);
+        if(Intake::get_hooks() == FWD) Intake::toggle();
+        hooks_motor.move_relative(-120, 200);
       }
     }
 
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L2)){
       int current_state = Arm::get_state();
       if(current_state != REST){
-        Arm::set_state(current_state-1);
+        Arm::set_state(REST);
+      }else{
+        Arm::set_state(LOADING);
       }
     }
 
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
-      Arm::set_state(SCORING);
+      Arm::set_state(READY);
     }
 
     Arm::arm_pid();

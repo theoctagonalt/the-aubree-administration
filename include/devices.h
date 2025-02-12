@@ -19,6 +19,7 @@ extern pros::adi::DigitalOut doinker;
 extern pros::adi::DigitalIn intake_switch;
 extern pros::Rotation arm_sensor;
 extern pros::Optical intake_colour;
+extern pros::Distance mogo_distance;
 
 extern lemlib::ControllerSettings arm_controller;
 extern lemlib::Chassis chassis;

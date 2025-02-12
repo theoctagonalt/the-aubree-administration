@@ -2,16 +2,16 @@
 #include "lemlib/api.hpp"
 
 #define LEFT_FRONT_MOTOR -16 
-#define LEFT_BACK_MOTOR -11
+#define LEFT_BACK_MOTOR -20
 #define LEFT_BACK_MOTOR_TOP 15
 
 #define RIGHT_FRONT_MOTOR 13 
-#define RIGHT_BACK_MOTOR 12
+#define RIGHT_BACK_MOTOR 11
 #define RIGHT_BACK_MOTOR_TOP -14 
 
 #define HOOKS -17
 #define PREROLLER 5  
-#define ARM -20
+#define ARM -21
 
 #define MOGO 1
 #define DOINKER 2
@@ -20,6 +20,7 @@
 #define INTAKE_COLOUR 1
 #define INERTIAL_SENSOR 18
 #define INTAKE_SWITCH 3
+#define DISTANCE_SENSOR 10
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
 
@@ -40,6 +41,7 @@ pros::Rotation arm_sensor (ARM_SENSOR);
 pros::Optical intake_colour (INTAKE_COLOUR);
 pros::adi::DigitalIn intake_switch (INTAKE_SWITCH);
 pros::IMU inertial (INERTIAL_SENSOR);
+pros::Distance mogo_distance (DISTANCE_SENSOR);
 
 //lemlib objects
 
@@ -68,7 +70,7 @@ lemlib::ControllerSettings lateral_controller(3.5,
                                              0 //TODO: TUNE SLEW
                                              );
 
-lemlib::ControllerSettings arm_controller(3,
+lemlib::ControllerSettings arm_controller(3.1,
                                           0, 
                                           0.1, 
                                           0, 
