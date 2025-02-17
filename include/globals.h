@@ -33,10 +33,11 @@
 #define LOADING 1
 #define SCORING 3
 #define READY 2
+#define HANGING 4
 
 #define REST_DEG 345
-#define LOADING_DEG 335
+#define LOADING_DEG 337
 #define SCORING_DEG 220
 #define READY_DEG 257
-
+#define HANGING_DEG 300
 #endif

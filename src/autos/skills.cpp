@@ -10,9 +10,9 @@
 
 void skills_route(){
   Intake::set_target_colour(RED);
-  chassis.setPose(0, 0, 0);
+  chassis.setPose(3, -1, 0);
   Arm::set_state(SCORING);
-  pros::delay(500);
+  pros::delay(1000);
   chassis.moveToPoint(0, -5, 1000);
   Arm::set_state(REST);
 
@@ -73,7 +73,7 @@ void skills_route(){
   chassis.turnToHeading(90, 1000, {.maxSpeed=100});
   chassis.waitUntilDone();
 
-  chassis.moveToPoint(-24, -12, 1000, {.forwards=false, .maxSpeed=100});
+  chassis.moveToPoint(-26, -12, 1000, {.forwards=false, .maxSpeed=100});
   chassis.waitUntilDone();
   pros::delay(500);
   Mogo::toggle();

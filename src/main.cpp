@@ -87,6 +87,12 @@ void opcontrol(){
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
       Arm::set_state(READY);
     }
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_UP)){
+      Arm::set_state(SCORING);
+    }
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_DOWN)){
+      Arm::set_state(HANGING);
+    }
 
     Arm::arm_pid();
 

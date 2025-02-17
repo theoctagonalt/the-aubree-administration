@@ -8,7 +8,7 @@ namespace Arm{
   int target_state = REST;
   int target_pos;
 
-  int arm_state_values[] = {REST_DEG, LOADING_DEG, READY_DEG, SCORING_DEG};
+  int arm_state_values[] = {REST_DEG, LOADING_DEG, READY_DEG, SCORING_DEG, HANGING_DEG};
 
   bool pid_enabled = false;
   int error_timeout = 0;
@@ -55,6 +55,12 @@ namespace Arm{
       }
 
       if(target_state == REST && fabs(error) < 2){
+        pid_enabled=false;
+        arm_motor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        arm_motor.brake();
+      }
+
+      if(target_state == HANGING && current_pos > 300){
         pid_enabled=false;
         arm_motor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         arm_motor.brake();

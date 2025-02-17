@@ -76,7 +76,7 @@ namespace Intake{
     }
     if(timeout > 0){
       timeout++;
-      if(timeout > 15 && hooks_state == OFF){
+      if(timeout > 30 && hooks_state == OFF){
         timeout = 0;
         set_hooks(FWD);
       }
