@@ -24,7 +24,7 @@ void update_subsystems() {
 	while(pros::competition::is_autonomous()){
 		Intake::update_intake();
 		Arm::arm_pid();
-		pros::delay(20);
+		pros::delay(5);
 	}
 }
 

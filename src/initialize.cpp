@@ -2,13 +2,14 @@
 #include "globals.h"
 #include "devices.h"
 
-int colour = RED;
+int colour = BLUE;
 int routine = NEG;
-int match;
+int match = ELIMS;
 
 void initialize(){
 	pros::lcd::initialize();
 	chassis.calibrate(true);
+	intake_colour.set_integration_time(3);
 	intake_colour.set_led_pwm(50);
 }
 
@@ -22,8 +23,8 @@ void competition_initialize(){
 				if(routine != 3) routine ++;
 				else {
 					routine = -1;
-					// if(match != 1) match++;
-					// else match = 0; 
+					if(match != 1) match++;
+					else match = 0; 
 				}				
 			}
 		}

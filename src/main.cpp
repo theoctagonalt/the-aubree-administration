@@ -10,6 +10,8 @@
 
 void opcontrol(){
   int game_time = 0;
+  Intake::set_hooks(OFF);
+  Intake::set_preroller(OFF);
   Intake::set_target_colour(get_colour());
 	while(true){
     //get the y and x values of the left and right joysticks respectively
@@ -100,9 +102,9 @@ void opcontrol(){
     if(pros::competition::is_connected() && !pros::competition::is_autonomous()){
       game_time++;
     } 
-    if(game_time == 3750){
+    if(game_time == 15000){
       master.rumble("--");
     }
-    pros::delay(20);
+    pros::delay(5);
   }
 }

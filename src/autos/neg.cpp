@@ -11,84 +11,66 @@
 void neg_route(){
   int colour = get_colour();
   int n = colour == RED ? 1 : -1;
-  int starting_y = colour == RED ? 3 : 4;
-  chassis.setPose(n*0, starting_y, 0);
+  int match = get_match();
 
-  chassis.moveToPoint(0, 13, 3000);
-  chassis.waitUntilDone();
-  int heading = colour == RED ? 48 : 318;
-  chassis.turnToHeading(heading, 1000);
-  chassis.waitUntilDone();
-  pros::delay(250);
-  Arm::set_state(SCORING);
-  pros::delay(1000);
-  Arm::set_state(REST);
-
-  chassis.moveToPoint(n*-5, -15, 1000, {.forwards=false});
-  chassis.waitUntilDone();
-
-  chassis.moveToPoint(n*-11, -21, 500);
+  int starting_y = colour == RED ? 20 : 0;
+  chassis.setPose(0, starting_y, n*90);
+  int rush_x = colour == RED ? 45 : -46;
+  int rush_y = colour == RED ? 13 : 6; 
+  chassis.moveToPoint(rush_x, rush_y, 1000);
+  Doinker::toggle();
   Intake::toggle();
-  chassis.waitUntilDone();
-  //FIRST RING??
-  int first_ring_x = colour == RED ? -35 : 39;
-  int first_ring_y = colour == RED ? -33 : -36;
-  chassis.moveToPoint(first_ring_x, first_ring_y, 1000);
-  chassis.waitUntilDone();
-  int mogo_x = colour == RED ? -28 : 33;
-  int mogo_y = colour == RED ? -3 : -5;
-  chassis.moveToPoint(mogo_x, mogo_y, 1000, {.forwards=false});
-  Intake::toggle();
-  chassis.waitUntilDone();
-  pros::delay(1100);
-  Mogo::toggle(); // mogo clamped
-  pros::delay(500);
-  Intake::toggle();
-
-
-  int second_ring_x = colour == RED ?  -47: 49;
-  int second_ring_y = colour == RED ? -28 : -31;
-  //SECOND RING
-  chassis.moveToPoint(second_ring_x, second_ring_y, 1000);
-  chassis.waitUntilDone();
-  pros::delay(500);
-
-  //MOVING BACK
-  chassis.moveToPoint(n*-25, -25, 1000, {.forwards=false});
-  chassis.waitUntilDone();
-  
-  int third_ring_x = colour == RED ?  -48 : 54;
-  int third_ring_y = colour == RED ? -33 : -38;
-  //THIRD RING
-  chassis.moveToPoint(third_ring_x, third_ring_y, 1000);
   chassis.waitUntilDone();
   pros::delay(1000);
-  // back up
-  chassis.moveToPoint(n*-20, -22, 1000, {.forwards=false});
+  Intake::toggle();
+
+  //backing up to the goal
+  if(colour == BLUE){
+    chassis.moveToPoint(n*35, 5, 500, {.forwards=false});
+    chassis.waitUntilDone();
+    chassis.moveToPoint(n*30, -10, 1000, {.forwards=false});
+    chassis.waitUntilDone();
+    Doinker::toggle();
+    chassis.moveToPoint(n*30, -20, 1000, {.forwards=false});
+    chassis.waitUntilDone();
+    Mogo::toggle();
+  }else{
+    chassis.moveToPoint(10, 15, 1000, {.forwards=false});
+    chassis.waitUntilDone();
+    chassis.moveToPoint(15, -10, 1000, {.forwards=false});
+    chassis.waitUntilDone();
+    Doinker::toggle();
+    chassis.moveToPoint(30, -20, 1000, {.forwards=false});
+    chassis.waitUntilDone();
+    Mogo::toggle();
+  }
+
+  pros::delay(500);
+  Intake::toggle();
+  if(colour == BLUE){
+    chassis.moveToPoint(-25, 15, 500);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-20, 18, 500);
+    chassis.waitUntilDone();
+  }else{
+    chassis.moveToPoint(30, 13, 1000);
+    chassis.waitUntilDone();
+    pros::delay(500);
+  }
+  int preload_x = colour == RED ? -10 : 0;
+  int preload_y = colour == RED ? 7 : -10;
+  chassis.moveToPoint(preload_x, preload_y, 1000);
   chassis.waitUntilDone();
-  // ladder
-  chassis.moveToPoint(n*-30, 8, 2000);
-  // chassis.moveToPoint(mogo_x, -8, 1000);
-  // int second_ring_x = colour == RED ? -45 : 46;
-  // int second_ring_y = colour == RED ? -32 : -27;
-  // chassis.moveToPoint(second_ring_x, second_ring_y, 1000);
-  // chassis.waitUntilDone();
-  // pros::delay(500);
-  // chassis.moveToPoint(n*-35, -40, 1000, {.forwards=false});
-  // chassis.waitUntilDone();
-  // int third_ring_x = colour == RED ? -47 : 47;
-  // int third_ring_y = colour == RED ? -40 : -37;
-  // chassis.moveToPoint(third_ring_x, third_ring_y, 1000);
-  // chassis.waitUntilDone();
-  // pros::delay(500);
-  // if (colour == RED){
-  //   chassis.moveToPoint(n*-35, -35, 2000, {.forwards=false});
-  //   chassis.waitUntilDone();
-  //   chassis.moveToPoint(n*-43, 6, 2000);
-  // }else{
-  //   chassis.moveToPoint(25, -35, 2000, {.forwards=false});
-  //   chassis.waitUntilDone();
-  //   chassis.moveToPoint(n*-42, 9, 2000);
-  
-  // }
+  pros::delay(1500);
+
+  //lader touch/fifth ring
+  if(match == QUALS){
+    int ladder_x = colour == RED ? 24 : -24;
+    int ladder_y = colour == RED ? -40 : -30;
+    chassis.moveToPoint(ladder_x, ladder_y, 1000);
+  }else{
+    int fifth_ring_x = colour == RED ? 10 : -10;
+    int fifth_ring_y = colour == RED ? -50 : -50;
+    chassis.moveToPoint(fifth_ring_x, fifth_ring_y, 2000, {.maxSpeed=50});
+  }
 }

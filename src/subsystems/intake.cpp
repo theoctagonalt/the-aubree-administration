@@ -8,9 +8,12 @@
 namespace Intake{
   int hooks_state = OFF;
   int preroller_stage = OFF;
+  int counter = 0;
+  bool colour_sort = true;
   int target_colour;
   int last_colour;
   int timeout;
+
 
   void toggle(){
     if(hooks_state == FWD){
@@ -37,6 +40,7 @@ namespace Intake{
 
   void set_hooks(int state){
     if(state == FWD){
+      timeout=0;
       hooks_motor.move_velocity(200);
       hooks_state = FWD;
     }else if(state == REV){
@@ -54,29 +58,28 @@ namespace Intake{
   int get_preroller(){
     return preroller_stage;
   }
-  int counter = 0;
-  bool colour_sort = true;
+
   void update_intake(){
     double current_hue = intake_colour.get_hue();
+    int proximity = intake_colour.get_proximity();
     if(current_hue < RED_HUE_MAX && current_hue > RED_HUE_MIN){
       last_colour = RED;
     }else if(current_hue < BLUE_HUE_MAX && current_hue > BLUE_HUE_MIN){
       last_colour = BLUE;
+    }else{  
+      last_colour = -1;
     }
-    pros::lcd::print(4, "colour: %i", last_colour);
-    if(intake_switch.get_value() && Arm::get_state() != LOADING && colour_sort){
-      counter++;
-      pros::lcd::print(5, "switch: %i", counter);
-      if(last_colour != target_colour && last_colour != -1 && hooks_state == FWD && timeout == 0){
+    if(Arm::get_state() != LOADING && colour_sort){
+      if(last_colour != target_colour && last_colour != -1 && hooks_state == FWD && timeout == 0 && proximity > 100){
         master.rumble("..");
-        set_hooks(-1);
+        set_hooks(REV);
         timeout=1;
         last_colour = -1;
       }
     }
     if(timeout > 0){
       timeout++;
-      if(timeout > 30 && hooks_state == OFF){
+      if(timeout > 30 && hooks_state == REV){
         timeout = 0;
         set_hooks(FWD);
       }

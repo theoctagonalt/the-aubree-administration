@@ -14,12 +14,12 @@
 #define ARM -21
 
 #define MOGO 1
-#define DOINKER 2
+#define DOINKER 4
 
 #define ARM_SENSOR 2 
 #define INTAKE_COLOUR 1
 #define INERTIAL_SENSOR 18
-#define INTAKE_SWITCH 3
+#define INTAKE_SWITCH 8
 #define DISTANCE_SENSOR 10
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
