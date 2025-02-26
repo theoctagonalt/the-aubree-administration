@@ -15,8 +15,8 @@ void neg_route(){
 
   int starting_y = colour == RED ? 20 : 0;
   chassis.setPose(0, starting_y, n*90);
-  int rush_x = colour == RED ? 45 : -46;
-  int rush_y = colour == RED ? 13 : 6; 
+  int rush_x = colour == RED ? 45 : -48;
+  int rush_y = colour == RED ? 13 : 8; 
   chassis.moveToPoint(rush_x, rush_y, 1000);
   Doinker::toggle();
   Intake::toggle();
@@ -48,9 +48,9 @@ void neg_route(){
   pros::delay(500);
   Intake::toggle();
   if(colour == BLUE){
-    chassis.moveToPoint(-25, 15, 500);
+    chassis.moveToPoint(-23, 15, 500);
     chassis.waitUntilDone();
-    chassis.moveToPoint(-20, 18, 500);
+    chassis.moveToPoint(-27, 27, 1000);
     chassis.waitUntilDone();
   }else{
     chassis.moveToPoint(30, 13, 1000);
@@ -59,15 +59,17 @@ void neg_route(){
   }
   int preload_x = colour == RED ? -10 : 0;
   int preload_y = colour == RED ? 7 : -10;
-  chassis.moveToPoint(preload_x, preload_y, 1000);
+  chassis.moveToPoint(preload_x, preload_y, 1500);
   chassis.waitUntilDone();
   pros::delay(1500);
 
   //lader touch/fifth ring
   if(match == QUALS){
-    int ladder_x = colour == RED ? 24 : -24;
-    int ladder_y = colour == RED ? -40 : -30;
-    chassis.moveToPoint(ladder_x, ladder_y, 1000);
+    int ladder_x = colour == RED ? 24 : -33;
+    int ladder_y = colour == RED ? -45 : -20;
+    chassis.moveToPoint(ladder_x, ladder_y, 1500);
+    chassis.waitUntilDone();
+    Arm::set_state(SCORING);
   }else{
     int fifth_ring_x = colour == RED ? 10 : -10;
     int fifth_ring_y = colour == RED ? -50 : -50;

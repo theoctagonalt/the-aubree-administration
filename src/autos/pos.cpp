@@ -15,29 +15,31 @@ void pos_route(){
 
   chassis.setPose(0, 0, n*-90);
 
-  chassis.moveToPoint(n*43, 0, 1000, {.forwards=false});
+  chassis.moveToPoint(n*42, 0, 1000, {.forwards=false});
   chassis.waitUntilDone();
 
-  chassis.turnToHeading(n*-135, 500);
+  chassis.turnToHeading(n*-115, 500);
   chassis.waitUntilDone();
 
-  int mogo_x = colour == RED ? 51 : -49;
+  int mogo_x = colour == RED ? 49 : -49;
+  int mogo_y = colour == RED ? 6 : 9;
 
-  chassis.moveToPoint(mogo_x, 9, 1000, {.forwards=false});
+  chassis.moveToPoint(mogo_x, mogo_y, 1000, {.forwards=false});
   chassis.waitUntilDone();
 
   Mogo::toggle();
   pros::delay(250);
 
-  bool won_mogo = mogo_distance.get() < 12;
+  chassis.moveToPoint(n*28, 15, 1000);
+  pros::delay(100);
+  
+  bool won_mogo = mogo_distance.get() < 25;
 
   if(won_mogo) {
     Intake::toggle();
   }else{
     Intake::set_preroller(FWD);
   }
-
-  chassis.moveToPoint(n*25, 15, 1000);
   chassis.waitUntilDone();
   pros::delay(100);
 
@@ -48,11 +50,17 @@ void pos_route(){
   }
   Mogo::toggle();
 
-  chassis.moveToPoint(n*33, 37, 1000, {.forwards=false});
+  int mogo_2_y = colour == RED ? 37 : 40;
+
+  chassis.moveToPoint(n*33, 40, 1000, {.forwards=false});
   chassis.waitUntilDone();
 
   Mogo::toggle();
   pros::delay(500);
   Intake::toggle();
+  pros::delay(1000);
 
+  chassis.moveToPoint(n*37, 48, 1000);
+  chassis.waitUntilDone();
+  Arm::set_state(SCORING);
 }

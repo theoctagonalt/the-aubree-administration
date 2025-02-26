@@ -48,11 +48,11 @@ pros::Distance mogo_distance (DISTANCE_SENSOR);
 lemlib::Drivetrain drivetrain (&left_motors, &right_motors, 11.705, lemlib::Omniwheel::NEW_275, 400, 2);
 
 //================================================================= TODO
-lemlib::ControllerSettings angular_controller(1.55, //kP
-                                              0.03, //kI
-                                              0, //kD
-                                              7.5, //anti-windup
-                                              1, //small error range (in)
+lemlib::ControllerSettings angular_controller(1.64, //kP
+                                              0, //kI
+                                              0.7, //kD
+                                              7, //anti-windup
+                                              0.1, //small error range (in)
                                               1000, //small error timeout (ms)
                                               0, //large error range (in)
                                               500, //large error timeout(ms)

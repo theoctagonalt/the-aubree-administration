@@ -4,7 +4,7 @@
 
 int colour = BLUE;
 int routine = NEG;
-int match = ELIMS;
+int match = QUALS;
 
 void initialize(){
 	pros::lcd::initialize();
@@ -20,7 +20,7 @@ void competition_initialize(){
 			if(colour != 1) colour++;
 			else {
 				colour = 0;
-				if(routine != 3) routine ++;
+				if(routine != 4) routine ++;
 				else {
 					routine = -1;
 					if(match != 1) match++;

@@ -25,6 +25,9 @@ namespace Arm{
   int get_state(){
     return target_state;
   }
+  void set_pid(int state){
+    pid_enabled = state;
+  }
 
   void arm_pid(){
     if(pid_enabled){

@@ -9,6 +9,7 @@
 #include "./autos/pos.h"
 #include "./autos/neg.h"
 #include "./autos/skills.h"
+#include "./autos/sawp.h"
 
 void screen() {
 	// loop forever
@@ -41,6 +42,13 @@ void autonomous() {
 		skills_route();
 	}else if(routine == DRIVE_FORWARD){
 		chassis.setPose(0, 0, 90);
-		chassis.moveToPoint(24, 0, 3000);
+		chassis.moveToPoint(24, 0, 1000);
+		chassis.waitUntilDone();
+		chassis.turnToHeading(270, 3000);
+		chassis.waitUntilDone();
+		chassis.moveToPoint(0, 0, 1000);
+		chassis.waitUntilDone();
+	}else if(routine == SAWP){
+		sawp();
 	}
 }

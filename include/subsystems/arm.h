@@ -4,7 +4,7 @@
 namespace Arm{
   void set_state(int state);
   int get_state();
-  void manual_control(int direction, bool value);
+  void set_pid(int state);
   void arm_pid();
 }
 

@@ -15,6 +15,7 @@
 #define NEG 1
 #define POS 2
 #define SKILLS 3
+#define SAWP 4
 
 #define QUALS 0
 #define ELIMS 1
@@ -36,7 +37,7 @@
 #define HANGING 4
 
 #define REST_DEG 345
-#define LOADING_DEG 337
+#define LOADING_DEG 334
 #define SCORING_DEG 220
 #define READY_DEG 257
 #define HANGING_DEG 300
