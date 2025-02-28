@@ -47,6 +47,10 @@ void opcontrol(){
         Intake::set_target_colour(-1);
       }
     }
+    // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)){
+    //   Intake::toggle_position_tracking();
+    //   master.rumble("..");
+    // }
 
     Intake::update_intake();
 
@@ -86,7 +90,7 @@ void opcontrol(){
       }
     }
 
-    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_LEFT)){
+    if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_X)){
       Arm::set_state(READY);
     }
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_UP)){

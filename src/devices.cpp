@@ -19,7 +19,8 @@
 #define ARM_SENSOR 2 
 #define INTAKE_COLOUR 1
 #define INERTIAL_SENSOR 18
-#define INTAKE_SWITCH 8
+#define AUTON_SELECTOR 8
+#define AUTON_SELECTOR_2 7
 #define DISTANCE_SENSOR 10
 
 pros::Controller master (pros::E_CONTROLLER_MASTER);
@@ -29,7 +30,7 @@ pros::MotorGroup left_motors ({LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, LEFT_BACK_MOTO
 pros::MotorGroup right_motors ({RIGHT_FRONT_MOTOR, RIGHT_BACK_MOTOR, RIGHT_BACK_MOTOR_TOP}, pros::MotorGear::blue);
 
 pros::Motor arm_motor (ARM, pros::MotorGear::green);
-pros::Motor hooks_motor(HOOKS, pros::MotorGear::red);
+pros::Motor hooks_motor(HOOKS, pros::MotorGear::green);
 pros::Motor preroller_motor(PREROLLER, pros::MotorGear::green);
 
 //pistons
@@ -39,7 +40,8 @@ pros::adi::DigitalOut doinker (DOINKER);
 // sensors
 pros::Rotation arm_sensor (ARM_SENSOR);
 pros::Optical intake_colour (INTAKE_COLOUR);
-pros::adi::DigitalIn intake_switch (INTAKE_SWITCH);
+pros::adi::DigitalIn auton_selector (AUTON_SELECTOR);
+pros::adi::DigitalIn auton_selector_2 (AUTON_SELECTOR_2);
 pros::IMU inertial (INERTIAL_SENSOR);
 pros::Distance mogo_distance (DISTANCE_SENSOR);
 

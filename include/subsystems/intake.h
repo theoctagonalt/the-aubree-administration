@@ -9,6 +9,7 @@ namespace Intake{
   int get_preroller();
   void update_intake();
   void set_target_colour(int colour);
+  void toggle_position_tracking();
   int get_target_colour();
 }
 

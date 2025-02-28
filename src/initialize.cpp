@@ -11,12 +11,13 @@ void initialize(){
 	chassis.calibrate(true);
 	intake_colour.set_integration_time(3);
 	intake_colour.set_led_pwm(50);
+	hooks_motor.set_encoder_units(pros::motor_encoder_units_e_t::E_MOTOR_ENCODER_DEGREES);
 }
 
 void competition_initialize(){
 	while(true){
 		pros::lcd::set_text(0, "Autonomous selector");
-		if(intake_switch.get_new_press()){
+		if(auton_selector.get_new_press()){
 			if(colour != 1) colour++;
 			else {
 				colour = 0;
@@ -26,6 +27,18 @@ void competition_initialize(){
 					if(match != 1) match++;
 					else match = 0; 
 				}				
+			}
+		}
+		if(auton_selector_2.get_new_press()){
+			if(colour != 0) colour--;
+			else {
+				colour = 1;
+				if(routine != -1) routine --;
+				else {
+					routine = 4;
+					if(match != 0) match--;
+					else match = 1; 
+				}
 			}
 		}
 		std::string output = "";
@@ -44,6 +57,9 @@ void competition_initialize(){
 				break;
 			case DRIVE_FORWARD:
 				output = "Drive Forward";
+				break;
+			case SAWP:
+				output = "Sawp";
 				break;
 		}
 		switch(colour){

@@ -13,6 +13,7 @@ namespace Intake{
   int target_colour;
   int last_colour;
   int timeout;
+  bool position_tracking = true;
 
 
   void toggle(){
@@ -58,7 +59,9 @@ namespace Intake{
   int get_preroller(){
     return preroller_stage;
   }
-
+  void toggle_position_tracking(){
+    position_tracking = !position_tracking;
+  }
   void update_intake(){
     double current_hue = intake_colour.get_hue();
     int proximity = intake_colour.get_proximity();
@@ -69,12 +72,24 @@ namespace Intake{
     }else{  
       last_colour = -1;
     }
+
+    // double pos = hooks_motor.get_position()-315;
+    // int remainder = (int) pos % 360;
+    // bool hook_correct_pos = (remainder < 10 && remainder > 0) || (remainder < -350 && remainder < 0);
+    // pros::lcd::set_text(0, std::to_string(hook_correct_pos));
+    // pros::lcd::set_text(1, std::to_string(remainder));
+    // //315
+    // //675
+    // //1035
+
     if(Arm::get_state() != LOADING && colour_sort){
       if(last_colour != target_colour && last_colour != -1 && hooks_state == FWD && timeout == 0 && proximity > 100){
         master.rumble("..");
+        // if(hook_correct_pos || !position_tracking){
         set_hooks(REV);
         timeout=1;
         last_colour = -1;
+        // }
       }
     }
     if(timeout > 0){
