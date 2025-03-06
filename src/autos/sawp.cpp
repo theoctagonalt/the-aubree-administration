@@ -10,7 +10,7 @@
 
 void sawp(){
   int colour = get_colour();
-  int n = colour == RED ? 1 : -1;
+  int n = colour == RED ? 1 : 1;
   int match = get_match();
 
   //alliance stake
@@ -19,6 +19,14 @@ void sawp(){
   chassis.waitUntilDone();
   Arm::set_state(SCORING);
   pros::delay(1000);
+  int x = chassis.getPose().x;
+  int y = chassis.getPose().y;
+  int heading = chassis.getPose().theta;
+  int alliance_heading = colour == RED ? 270 : 270;
+  chassis.turnToHeading(alliance_heading, 1000);
+  // chassis.moveToPoint(n*-11, -11, 250);
+  chassis.waitUntilDone();
+  // chassis.setPose(x, y, heading);
 
   //goal 
   chassis.moveToPoint(n*28, 7, 1000, {.forwards=false});
@@ -35,33 +43,34 @@ void sawp(){
   chassis.waitUntilDone();
   pros::delay(1000);
 
-  //drop goal
-  chassis.moveToPoint(n*4, 9, 1000, {.forwards=false});
-  chassis.waitUntilDone();
-  Mogo::toggle();
-  pros::delay(100);
+  // //drop goal
+  // chassis.moveToPoint(n*4, 9, 1000, {.forwards=false});
+  // chassis.waitUntilDone();
+  // Mogo::toggle();
+  // pros::delay(100);
 
-  //ring stakc
+  // -------------------+// //ring stakc
   chassis.moveToPoint(n*9, -45, 1500);
-  Intake::set_target_colour(-1);
+  // Intake::set_target_colour(-1);
   chassis.waitUntilDone();
-  pros::delay(400);
-  Intake::toggle();
-  Intake::set_target_colour(colour);
+  // pros::delay(400);
+  // Intake::toggle();
+  // Intake::set_target_colour(colour);
 
-  //second mogo
-  chassis.moveToPoint(n*37, -37, 1000, {.forwards=false, .maxSpeed=75});
-  chassis.waitUntilDone();
-  pros::delay(500);
-  Mogo::toggle();
-  pros::delay(500);
+  // //second mogo
+  // chassis.moveToPoint(n*37, -37, 1000, {.forwards=false, .maxSpeed=75});
+  // chassis.waitUntilDone();
+  // pros::delay(500);
+  // Mogo::toggle();
+  // pros::delay(500);
 
-  //third ring
-  Intake::toggle();
-  chassis.moveToPoint(n*41, -65, 1000);
-  chassis.waitUntilDone();
-  pros::delay(1000);
+  // //third ring
+  // Intake::toggle();
+  // chassis.moveToPoint(n*41, -65, 1000);
+  // chassis.waitUntilDone();
+  // pros::delay(1000);
 
   // ladder
   chassis.moveToPoint(n*35, -20, 1500);
+  Arm::set_state(SCORING);
 }

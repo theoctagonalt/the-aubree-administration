@@ -58,7 +58,7 @@ void opcontrol(){
     if(master.get_digital_new_press(pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_RIGHT)){
       Mogo::toggle();
       if(Mogo::get_state() == EXTENDED){
-        master.rumble("-");
+        // master.rumble("-");
       }else{
         master.rumble(".");
       }

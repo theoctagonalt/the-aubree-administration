@@ -2,7 +2,7 @@
 #include "globals.h"
 #include "devices.h"
 
-int colour = BLUE;
+int colour = RED;
 int routine = NEG;
 int match = QUALS;
 
